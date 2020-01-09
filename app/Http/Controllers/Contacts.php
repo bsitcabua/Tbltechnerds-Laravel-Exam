@@ -10,6 +10,8 @@ class Contacts extends Controller
     
     public function index()
     {
+        $page = (isset($_GET['page'])) ? strip_tags(trim($_GET['page'])) : 1;
+        $limit = $page * 10;
         $query = (isset($_GET['query'])) ? strip_tags(trim($_GET['query'])) : null;
         
         $contacts = Contact::where('user_id', auth()->user()->id);
@@ -21,7 +23,7 @@ class Contacts extends Controller
                         ->orWhere('email', 'LIKE', '%' . $query . '%');
         }
 
-        $contacts = $contacts->get();
+        $contacts = $contacts->paginate(10);
 
         return view('pages.contacts', ["contacts"=> $contacts]);
     }

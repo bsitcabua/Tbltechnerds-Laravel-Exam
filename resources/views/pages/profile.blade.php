@@ -52,6 +52,17 @@
                                     <input type="text" name="contact_no" id="contact_no" placeholder="Contact No."  value="{{ $profile->contact_no }}" class="form-control border-input">
                                 </div>
 
+                                <caption>Leave it blank if you don't want to change the password.</caption>
+                                <div class="form-group">
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" id="password" placeholder="Password" class="form-control border-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirm Password:</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="password_confirmation" class="form-control border-input">
+                                </div>
+
                                 <div class="form-group">
                                     <button class="btn btn-primary" type="submit">Update Profile</button>
                                 </div>

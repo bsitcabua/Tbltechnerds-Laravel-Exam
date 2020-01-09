@@ -10,7 +10,19 @@ class Contacts extends Controller
     
     public function index()
     {
-        $contacts = Contact::all();
+        $query = (isset($_GET['query'])) ? strip_tags(trim($_GET['query'])) : null;
+        
+        $contacts = Contact::where('user_id', auth()->user()->id);
+
+        if($query){
+            $contacts = $contacts->where('first_name', 'LIKE', '%' . $query . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $query . '%')
+                        ->orWhere('contact_no', 'LIKE', '%' . $query . '%')
+                        ->orWhere('email', 'LIKE', '%' . $query . '%');
+        }
+
+        $contacts = $contacts->get();
+
         return view('pages.contacts', ["contacts"=> $contacts]);
     }
 
@@ -31,6 +43,7 @@ class Contacts extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'contact_no' => $request->contact_no,
+            'user_id'   => auth()->user()->id,
         ]);
 
         // Redirect

@@ -16,6 +16,25 @@ class Profile extends Controller
 
     public function update(Request $request)
     {
+        if($request->password || $request->password_confirmation){
+            $request->validate([
+                'first_name' => 'required|max:100',
+                'last_name' => 'required|max:100',
+                'contact_no' => 'required|max:100',
+                'email' => 'required|email',
+                'password' => 'required|confirmed|min:5',
+            ]);
+        }
+        else{
+            $request->validate([
+                'first_name' => 'required|max:100',
+                'last_name' => 'required|max:100',
+                'contact_no' => 'required|max:100',
+                'email' => 'required|email',
+            ]);
+        }
+        
+
         $user = User::find($request->id);
 
         $user->first_name = $request->first_name;

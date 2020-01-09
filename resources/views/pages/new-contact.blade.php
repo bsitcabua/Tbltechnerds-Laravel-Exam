@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                                    <button class="btn btn-primary" type="submit">Add contact</button>
                                 </div>
 
                             </form>
